@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Map from './components/Map'
+import SearchBar from './components/SearchBar';
 
 class App extends Component {
   state = {
@@ -16,15 +17,28 @@ class App extends Component {
 
   render() {
     const { currentCoords, mapCenterCoords } = this.state;
-    
+
     return (
       <div className="App">
+        <SearchBar currentCoords={currentCoords} />
         <Map 
           currentCoords={currentCoords}
           mapCenterCoords={mapCenterCoords}
         />
       </div>
     );
+  }
+
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { longitude, latitude } = position.coords;
+
+      this.setState({
+        currentCoords: {
+          latitude, longitude,
+        }
+      });
+    });
   }
 }
 
