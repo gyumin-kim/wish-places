@@ -10,6 +10,9 @@
     <meta name="theme-color" content="#000000" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Wish Places</title>
+    <!-- %REACT_APP_NAVER_API_CLIENT_ID% 부분은 서버 실행 시 'yarn start' 앞에 환경변수로 넣어주면 된다. -->
+    <!-- 실행 시 ===> REACT_APP_NAVER_API_CLIENT_ID="여기에_네이버_map_api_key를_넣는다"  -->
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=%REACT_APP_NAVER_API_CLIENT_ID%"></script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

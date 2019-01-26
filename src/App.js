@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
 import './App.css';
+import Map from './components/Map'
 
 class App extends Component {
-  fileInput = React.createRef();
+  state = {
+    currentCoords: {
+      longitude: 127.105399,
+      latitude: 37.3595704,
+    },
+    mapCenterCoords: {
+      longitude: 127.105399,
+      latitude: 37.3595704,
+    },
+  };
 
   render() {
+    const { currentCoords, mapCenterCoords } = this.state;
+    
     return (
       <div className="App">
-        <input multiple={false} ref={this.fileInput} type="file" />
-        <button type="button" onClick={this.onClickButton.bind(this)}>버튼</button>
+        <Map 
+          currentCoords={currentCoords}
+          mapCenterCoords={mapCenterCoords}
+        />
       </div>
     );
-  }
-
-  onClickButton() {
-    // Ref: DOM에 직접 접근할 경우
-    // .current가 <input> 태그를 의미한다.
-    const [file = {name: '', size: ''}] = this.fileInput.current.files;
-    const { name, size } = file;
-
-    alert(`파일 이름: ${name}, 파일 크기: ${size} byte`);
   }
 }
 
