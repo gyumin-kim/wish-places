@@ -1,50 +1,25 @@
 import React, { Component } from 'react';
-
-const Person = (props) => {
-  return (
-    <p>
-      {props.name}: {props.count}
-    </p>
-  );
-};
+import './App.css';
 
 class App extends Component {
-  state = {
-    gyumin: 0,
-    kim: 0,
-    web: 0,
-  }
+  fileInput = React.createRef();
 
   render() {
     return (
       <div className="App">
-        <Person name="Gyumin" count={this.state.gyumin}/>
-        <button type="button" onClick={this.onClickCounter.bind(this)} name="gyumin">
-          Gyumin Up
-        </button>
-
-        <Person name="Kim" count={this.state.kim}/>
-        <button type="button" onClick={this.onClickCounter.bind(this)} name="kim">
-          Kim Up
-        </button>
-
-        <Person name="Web" count={this.state.web}/>
-        <button type="button" onClick={this.onClickCounter.bind(this)} name="web">
-          Web Up
-        </button>
+        <input multiple={false} ref={this.fileInput} type="file" />
+        <button type="button" onClick={this.onClickButton.bind(this)}>버튼</button>
       </div>
     );
   }
-  
-  onClickCounter(event) {
-    // name: <button>의 name property가 들어온다.
-    const { name } = event.target;
-    // const name = event.target.name;
 
-    this.setState({
-      // 동적으로 key를 처리. name으로 들어온 것에 따라 다른 state를 처리
-      [name]: this.state[name] + 1,
-    });
+  onClickButton() {
+    // Ref: DOM에 직접 접근할 경우
+    // .current가 <input> 태그를 의미한다.
+    const [file = {name: '', size: ''}] = this.fileInput.current.files;
+    const { name, size } = file;
+
+    alert(`파일 이름: ${name}, 파일 크기: ${size} byte`);
   }
 }
 
